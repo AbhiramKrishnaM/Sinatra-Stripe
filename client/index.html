@@ -8,6 +8,8 @@
   <body>
     <h1>Hey there</h1>
 
+    <button type="submit" id="btn">Click me!</button>
+
     <script src="https://js.stripe.com/v3/"></script>
     <script>
       var stripe;
@@ -21,6 +23,29 @@
         .catch((error) => {
           console.log("Error", error);
         });
+
+      const button = document.getElementById("btn");
+      button.addEventListener("click", (event) => {
+        event.preventDefault();
+
+        fetch("/my-post-route", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            test: "I123",
+            payment_method: "visa",
+          }),
+        })
+          .then((response) => response.data)
+          .then((data) => {
+            console.log("Data", data);
+          })
+          .catch((error) => {
+            console.log("Error", error);
+          });
+      });
     </script>
   </body>
 </html>

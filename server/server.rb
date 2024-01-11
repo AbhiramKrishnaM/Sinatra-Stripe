@@ -23,3 +23,11 @@ get "/public-keys" do
   content_type "application/json"
   { key: ENV['STRIPE_PUBLIC_KEY'] }.to_json
 end
+
+
+post "/my-post-route" do
+  data = JSON.parse(request.body.read, symbolize_names: true)
+  puts data.to_json
+
+  data.to_json
+end
