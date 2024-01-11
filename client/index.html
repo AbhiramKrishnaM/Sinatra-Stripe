@@ -10,7 +10,17 @@
 
     <script src="https://js.stripe.com/v3/"></script>
     <script>
-      console.log("hello world");
+      var stripe;
+
+      fetch("/public-keys")
+        .then((response) => response.json)
+        .then((data) => {
+          stripe = Stripe(data.key);
+          console.log("Success", data);
+        })
+        .catch((error) => {
+          console.log("Error", error);
+        });
     </script>
   </body>
 </html>
